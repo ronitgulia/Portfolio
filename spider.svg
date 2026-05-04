@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Abdomen -->
+  <ellipse cx="50" cy="65" rx="14" ry="20" fill="white" stroke="none" />
+  <!-- Cephalothorax -->
+  <circle cx="50" cy="38" r="10" fill="white" stroke="none" />
+  
+  <!-- Left Legs -->
+  <polyline points="42,38 20,25 10,40" fill="none" />
+  <polyline points="40,46 15,45 5,60" fill="none" />
+  <polyline points="40,54 15,65 10,85" fill="none" />
+  <polyline points="42,62 25,85 20,95" fill="none" />
+
+  <!-- Right Legs -->
+  <polyline points="58,38 80,25 90,40" fill="none" />
+  <polyline points="60,46 85,45 95,60" fill="none" />
+  <polyline points="60,54 85,65 90,85" fill="none" />
+  <polyline points="58,62 75,85 80,95" fill="none" />
+</svg>

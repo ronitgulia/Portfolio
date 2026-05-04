@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ronit Gulia // Earth-42</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@400;700;900&family=Permanent+Marker&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-content glitch-text" data-text="SCANNING MULTIVERSE...">SCANNING MULTIVERSE...</div>
+    <div class="progress-bar">
+      <div id="progress"></div>
+    </div>
+  </div>
+
+  <!-- Theme Switcher -->
+  <button id="themeSwitcher" class="theme-btn" aria-label="Switch Universe Theme">
+    <span class="icon">🌌</span> <span class="theme-name">EARTH-42</span>
+  </button>
+
+  <!-- Web Shooter Canvas -->
+  <canvas id="webShooterCanvas"></canvas>
+
+  <!-- SVG Filters for Production Effects -->
+  <svg style="display:none;">
+    <defs>
+      <filter id="chromatic">
+        <feOffset dx="3" dy="0" in="SourceGraphic" result="red-shift" />
+        <feOffset dx="-3" dy="0" in="SourceGraphic" result="cyan-shift" />
+        <feComponentTransfer in="red-shift" result="red-only">
+          <feFuncR type="linear" slope="1" />
+          <feFuncG type="linear" slope="0" />
+          <feFuncB type="linear" slope="0" />
+        </feComponentTransfer>
+        <feComponentTransfer in="cyan-shift" result="cyan-only">
+          <feFuncR type="linear" slope="0" />
+          <feFuncG type="linear" slope="1" />
+          <feFuncB type="linear" slope="1" />
+        </feComponentTransfer>
+        <feBlend mode="screen" in="red-only" in2="cyan-only" result="chromatic-blend" />
+        <feBlend mode="screen" in="SourceGraphic" in2="chromatic-blend" />
+      </filter>
+      <filter id="glitch-filter">
+        <feTurbulence type="fractalNoise" baseFrequency="0.05 0.95" numOctaves="1" result="noise" />
+        <feColorMatrix type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" in="noise"
+          result="coloredNoise" />
+        <feDisplacementMap in="SourceGraphic" in2="coloredNoise" scale="10" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Film Grain Overlay -->
+  <div class="film-grain"></div>
+
+  <!-- Custom Web Cursor -->
+  <div class="spider-cursor" id="cursor"></div>
+  <div class="spider-cursor-trail" id="cursorTrail"></div>
+
+  <!-- ██ PHASE 1: THE MULTIVERSE CANVAS ██ -->
+  <div id="phase1" class="phase">
+    <div class="parallax-layer" data-speed="0.2"><canvas id="webCanvas"></canvas></div>
+    <div class="city-silhouette parallax-layer" data-speed="0.5"></div>
+    <div class="halftone-overlay"></div>
+
+    <div class="dv-intro parallax-layer" data-speed="1.2" id="dvIntro">
+      <div class="dv-label glitch-text" data-text="INTO THE">INTO THE</div>
+      <h1 class="dv-title">DEV-VERSE</h1>
+      <p class="dv-sub">An infinite web of developers. But you're looking for <em>the anomaly.</em></p>
+      <div class="dv-hint">Locate the glowing red node 🕷️</div>
+    </div>
+
+    <div id="notHimMsg" class="comic-bubble not-him">"WRONG UNIVERSE, MAN!"</div>
+    <div id="foundMsg" class="comic-bubble found-him">"THWIP! FOUND HIM!"</div>
+  </div>
+
+  <!-- ██ PHASE 2: HYPER-SPACE JUMP ██ -->
+  <div id="phase2" class="phase hidden">
+    <div class="tunnel-bg"></div>
+    <div class="falling-figure parallax-layer" data-speed="2">
+      <img src="ronit.png" alt="Ronit" id="jumpPhoto" />
+    </div>
+    <div class="sound-effect" id="thwipText">THWIP!</div>
+    <div class="speed-lines"></div>
+  </div>
+
+  <!-- ██ PHASE 3: PORTFOLIO GRID (COMIC BOOK PAGE) ██ -->
+  <div id="phase3" class="phase hidden comic-page">
+
+    <nav class="spidey-nav">
+      <div class="nav-logo glitch-text" data-text="RONIT.G">RONIT.G</div>
+      <div class="nav-links">
+        <a href="#origin">ORIGIN</a>
+        <a href="#powers">POWERS</a>
+        <a href="#missions">MISSIONS</a>
+        <a href="#certifications">CERTS</a>
+        <a href="#comms">COMMS</a>
+      </div>
+    </nav>
+
+    <div class="comic-grid container">
+
+      <!-- PANEL 1: HERO OVERVIEW (Spans 2 columns) -->
+      <section class="panel panel-hero" id="origin">
+        <div class="panel-bg halftone-red"></div>
+        <div class="panel-content layout-split">
+          <div class="hero-image-container parallax-layer" data-speed="0.5" id="heroMaskContainer">
+            <img src="ronit.png" alt="Ronit Gulia" class="hero-profile-img chromatic" loading="lazy" id="ronitImage" />
+            <img src="spiderman.png" alt="Spider-Man Mask" class="hero-profile-img hero-spiderman-mask chromatic"
+              loading="lazy" id="spidermanImage" onerror="this.style.display='none'" />
+            <div class="tape top-left"></div>
+            <div class="tape bottom-right"></div>
+          </div>
+          <div class="hero-text-container parallax-layer" data-speed="1.2">
+            <div class="comic-caption">EARTH-42 // JAIPUR</div>
+            <h1 class="comic-title title-offset">RONIT<br />GULIA</h1>
+            <h2 class="comic-subtitle">AI & ML ENGINEER</h2>
+            <div class="speech-bubble-hero">
+              <p>"Building intelligence, one tensor at a time."</p>
+              <div class="tail"></div>
+            </div>
+            <p class="comic-body">I am an AI/ML Engineer dedicated to bridging the gap between cutting-edge research and
+              high-performance production environments. Currently pursuing my B.Tech in Artificial Intelligence and
+              Machine Learning, my focus is on architecting intelligent systems that are not just accurate, but
+              scalable, efficient, and operationally robust..</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 2: QUICK STATS -->
+      <section class="panel panel-stats">
+        <div class="panel-bg halftone-blue"></div>
+        <div class="panel-content">
+          <div class="stat-block">
+            <span class="stat-num">4+</span>
+            <span class="stat-label">MAJOR<br />MISSIONS</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num">4</span>
+            <span class="stat-label">UNLOCKED<br />BADGES</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num">1</span>
+            <span class="stat-label">CORP<br />INTERNSHIP</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 3: SKILL TREE -->
+      <section class="panel panel-skills" id="powers">
+        <div class="panel-bg action-lines-bg"></div>
+        <div class="panel-content">
+          <div class="comic-caption yellow-box">MY POWERS</div>
+          <div class="skill-cloud">
+            <button class="sk-tag s-large chromatic-hover" data-skill="python">Python</button>
+            <button class="sk-tag s-med" data-skill="cpp">C/C++</button>
+            <button class="sk-tag s-large chromatic-hover" data-skill="pytorch">PyTorch</button>
+            <button class="sk-tag s-med" data-skill="tensorflow">TensorFlow</button>
+            <button class="sk-tag s-small" data-skill="keras">Keras</button>
+            <button class="sk-tag s-med" data-skill="scikit">Scikit-learn</button>
+            <button class="sk-tag s-small" data-skill="numpy">NumPy & Pandas</button>
+            <button class="sk-tag s-large" data-skill="transformers">Transformers</button>
+            <button class="sk-tag s-med" data-skill="cnns">CNNs & RNNs</button>
+            <button class="sk-tag s-large chromatic-hover" data-skill="llms">LLMs & GPT</button>
+            <button class="sk-tag s-med" data-skill="rag">LangChain</button>
+            <button class="sk-tag s-med chromatic-hover" data-skill="rl">RL (PPO)</button>
+            <button class="sk-tag s-small" data-skill="nlp">NLP & NER</button>
+            <button class="sk-tag s-small" data-skill="mysql">MySQL</button>
+            <button class="sk-tag s-small" data-skill="jupyter">Jupyter</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 4: MISSIONS HEADER -->
+      <section class="panel panel-header">
+        <h2 class="mega-text outline-text">MISSION LOG</h2>
+        <div class="sfx-text poof">POOF!</div>
+      </section>
+
+      <!-- PANEL 5: MISSION 1 -->
+      <section class="panel panel-mission" id="missions" data-skills="yolov8,rl,tensorrt,python">
+        <div class="panel-bg halftone-yellow"></div>
+        <div class="panel-content">
+          <div class="mission-badge">M-01</div>
+          <h3>AUTONOMOUS LAST-MILE BOT</h3>
+          <p>YOLOv8 for vision + PPO for path planning. Accelerated via TensorRT to hit <strong>240 FPS</strong> on edge
+            hardware. 94% obstacle avoidance.</p>
+          <div class="tech-stack"><span>RL</span><span>YOLOv8</span><span>FastAPI</span></div>
+          <a href="https://github.com/ronitgulia" class="action-btn"
+            style="font-size: 14px; padding: 5px 10px; margin-top: 15px;" target="_blank">GITHUB ↗</a>
+        </div>
+      </section>
+
+      <!-- PANEL 6: MISSION 2 -->
+      <section class="panel panel-mission" data-skills="pytorch,genai,python">
+        <div class="panel-bg halftone-cyan"></div>
+        <div class="panel-content">
+          <div class="mission-badge">M-02</div>
+          <h3>LOW-LIGHT ENHANCEMENT</h3>
+          <p>CVAE-based generative model using the reparameterization trick to "relight" images in fog/night for
+            autonomous cars.</p>
+          <div class="tech-stack"><span>CVAE</span><span>PyTorch</span><span>GenAI</span></div>
+          <a href="https://github.com/ronitgulia" class="action-btn"
+            style="font-size: 14px; padding: 5px 10px; margin-top: 15px;" target="_blank">GITHUB ↗</a>
+        </div>
+      </section>
+
+      <!-- PANEL 7: MISSION 3 -->
+      <section class="panel panel-mission" data-skills="rag,genai,python">
+        <div class="panel-bg halftone-magenta"></div>
+        <div class="panel-content">
+          <div class="mission-badge">M-03</div>
+          <h3>MEDICHAIN AI</h3>
+          <p>Multi-modal health AI. CNNs for X-rays + LangChain/GPT-4 for a zero-hallucination RAG clinical assistant.
+          </p>
+          <div class="tech-stack"><span>RAG</span><span>GPT-4</span><span>CNN</span></div>
+          <a href="https://github.com/ronitgulia" class="action-btn"
+            style="font-size: 14px; padding: 5px 10px; margin-top: 15px;" target="_blank">GITHUB ↗</a>
+        </div>
+      </section>
+
+      <!-- PANEL 7.5: MISSION 4 -->
+      <section class="panel panel-mission" data-skills="genai,python">
+        <div class="panel-bg halftone-red"></div>
+        <div class="panel-content">
+          <div class="mission-badge">M-04</div>
+          <h3>PRIVACY SYNTHETIC DATA</h3>
+          <p>VAE architecture mapping inputs into normal prior. Generates high-fidelity synthetic datasets maintaining
+            GDPR compliance without exposing identities.</p>
+          <div class="tech-stack"><span>VAE</span><span>GenAI</span><span>GDPR</span></div>
+          <a href="https://github.com/ronitgulia" class="action-btn"
+            style="font-size: 14px; padding: 5px 10px; margin-top: 15px;" target="_blank">GITHUB ↗</a>
+        </div>
+      </section>
+
+      <!-- PANEL 8: MISSION 5 -->
+      <section class="panel panel-mission" data-skills="python">
+        <div class="panel-bg halftone-blue"></div>
+        <div class="panel-content">
+          <div class="mission-badge">M-05</div>
+          <h3>NIFTY 100 FINANCIAL INTELLIGENCE</h3>
+          <p>A comprehensive financial data analysis tool and prediction model focused on the Nifty 100 index.</p>
+          <div class="tech-stack"><span>Finance</span><span>ML</span><span>Python</span></div>
+          <a href="https://github.com/ronitgulia" class="action-btn"
+            style="font-size: 14px; padding: 5px 10px; margin-top: 15px;" target="_blank">GITHUB ↗</a>
+        </div>
+      </section>
+
+      <!-- PANEL 9: MISSION 6 -->
+      <section class="panel panel-mission" data-skills="python,genai">
+        <div class="panel-bg halftone-yellow"></div>
+        <div class="panel-content">
+          <div class="mission-badge">M-06</div>
+          <h3>JARVIS AI VOICE ASSISTANT</h3>
+          <p>An intelligent, voice-activated virtual assistant powered by generative AI models, capable of executing
+            tasks autonomously.</p>
+          <div class="tech-stack"><span>Voice AI</span><span>GenAI</span><span>Python</span></div>
+          <a href="https://github.com/ronitgulia" class="action-btn"
+            style="font-size: 14px; padding: 5px 10px; margin-top: 15px;" target="_blank">GITHUB ↗</a>
+        </div>
+      </section>
+
+      <!-- PANEL 10: MISSION 7 -->
+      <section class="panel panel-mission" data-skills="python">
+        <div class="panel-bg halftone-cyan"></div>
+        <div class="panel-content">
+          <div class="mission-badge">M-07</div>
+          <h3>AUTOSTREAM AGENT</h3>
+          <p>An autonomous agent system designed to streamline and automate complex data workflows and streaming
+            processes.</p>
+          <div class="tech-stack"><span>Agents</span><span>Automation</span><span>Python</span></div>
+          <a href="https://github.com/ronitgulia" class="action-btn"
+            style="font-size: 14px; padding: 5px 10px; margin-top: 15px;" target="_blank">GITHUB ↗</a>
+        </div>
+      </section>
+
+      <!-- PANEL 11: MISSION 8 -->
+      <section class="panel panel-mission" data-skills="opencv,python">
+        <div class="panel-bg halftone-magenta"></div>
+        <div class="panel-content">
+          <div class="mission-badge">M-08</div>
+          <h3>HAND CONNECT</h3>
+          <p>A computer vision-based application leveraging hand tracking for interactive, touchless user interfaces.
+          </p>
+          <div class="tech-stack"><span>Computer Vision</span><span>OpenCV</span><span>Python</span></div>
+          <a href="https://github.com/ronitgulia" class="action-btn"
+            style="font-size: 14px; padding: 5px 10px; margin-top: 15px;" target="_blank">GITHUB ↗</a>
+        </div>
+      </section>
+
+      <!-- PANEL 12: MISSION 9 -->
+      <section class="panel panel-mission" data-skills="python">
+        <div class="panel-bg halftone-red"></div>
+        <div class="panel-content">
+          <div class="mission-badge">M-09</div>
+          <h3>MOOD MUSIC</h3>
+          <p>An intelligent music recommendation system that curates playlists based on emotion and sentiment analysis.
+          </p>
+          <div class="tech-stack"><span>NLP</span><span>Audio</span><span>ML</span></div>
+          <a href="https://github.com/ronitgulia" class="action-btn"
+            style="font-size: 14px; padding: 5px 10px; margin-top: 15px;" target="_blank">GITHUB ↗</a>
+        </div>
+      </section>
+
+      <!-- PANEL 8: EXPERIENCE -->
+      <section class="panel panel-exp">
+        <div class="panel-bg spider-web-bg"></div>
+        <div class="panel-content">
+          <div class="comic-caption">FIELD EXPERIENCE</div>
+          <div class="exp-block">
+            <h3 class="glitch-text" data-text="GLOWLOGISTICS">GLOWLOGISTICS</h3>
+            <h4>AI ENGINEER INTERN // 2025</h4>
+            <p>Deployed real-time cargo damage detection using YOLOv8 + TensorRT. Trained on 50k+ images achieving 96%
+              precision. Containerized via Docker/K8s hitting sub-100ms latency.</p>
+          </div>
+
+          <div class="exp-block"
+            style="background: var(--yellow); color: var(--ink); box-shadow: -8px 8px 0 var(--cyan); margin-top: 30px; transform: rotate(-1deg);">
+            <h3 class="glitch-text" data-text="BOLD ANALYTICS">BOLD ANALYTICS</h3>
+            <h4 style="color: var(--red);">DATA ANALYST INTERN</h4>
+            <p>Conducted in-depth data analysis and developed insightful dashboards to drive strategic business
+              decisions. Leveraged statistical tools and data visualization techniques to uncover actionable trends.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 8.5: CERTIFICATIONS -->
+      <section class="panel panel-exp" id="certifications">
+        <div class="panel-bg spider-web-bg"
+          style="background: repeating-radial-gradient(circle at 50% 50%, transparent, transparent 20px, rgba(0,255,255,0.05) 21px, transparent 22px);">
+        </div>
+        <div class="panel-content">
+          <div class="comic-caption yellow-box">LICENCE AND CERTIFICATIONS</div>
+
+          <div class="exp-block"
+            style="background: var(--cyan); box-shadow: -8px 8px 0 var(--red); transform: rotate(-1deg);">
+            <h3 class="glitch-text" data-text="GOOGLE SKILLS" style="color: var(--ink);">GOOGLE SKILLS</h3>
+            <h4 style="color: var(--ink);">GENAI & ML ENGINEER // AUG 2025 - JAN 2026</h4>
+            <p style="color: var(--ink);">• Advanced: Generative AI for Developers<br>• Machine Learning Engineer</p>
+          </div>
+
+          <div class="exp-block"
+            style="background: var(--yellow); color: var(--ink); box-shadow: -8px 8px 0 var(--cyan); margin-top: 30px; transform: rotate(1deg);">
+            <h3 class="glitch-text" data-text="TATA (FORAGE)">TATA (FORAGE)</h3>
+            <h4 style="color: var(--red);">DATA ANALYTICS & VIZ // NOV 2025 - DEC 2025</h4>
+            <p>• GenAI Powered Data Analytics Job Simulation<br>• Data Visualisation: Empowering Business with Effective
+              Insights</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 9: CONTACT -->
+      <section class="panel panel-contact" id="comms">
+        <div class="panel-bg halftone-dark"></div>
+        <div class="panel-content layout-split">
+          <div class="contact-text">
+            <h2 class="mega-text">SEND THE SIGNAL</h2>
+            <p>Ready to jump into the next dimension. Hit my comms.</p>
+            <a href="mailto:ronitgulia3@gmail.com" class="action-btn">ronitgulia3@gmail.com <span
+                class="arr">↗</span></a>
+            <div class="socials">
+              <a href="#">GITHUB</a> | <a href="#">LINKEDIN</a> | <a href="#">+91 9319333635</a>
+            </div>
+          </div>
+          <div class="contact-form-container">
+            <form class="comic-form" id="contactForm" onsubmit="handleForm(event)">
+              <input type="text" id="senderName" placeholder="WHO ARE YOU?" required />
+              <input type="email" id="senderEmail" placeholder="YOUR EMAIL" required />
+              <textarea id="senderMission" rows="4" placeholder="WHAT'S THE MISSION?" required></textarea>
+              <button type="submit" id="formBtn" class="action-btn solid">THWIP IT 🕸</button>
+            </form>
+          </div>
+        </div>
+        <div class="sfx-text thwack">THWACK!</div>
+      </section>
+
+    </div>
+
+    <footer class="comic-footer container">
+      <p>RONIT GULIA // EARTH-42 // 2025</p>
+    </footer>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
